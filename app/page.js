@@ -12,18 +12,27 @@ const page = () => {
     setdesc("")
     console.log(maintask)
   }
+  const deleteHandler=(i) => {
+    let copytask=[...maintask]
+    copytask.splice(i,1)
+    setMainTask(copytask)
+  }
+
   let renderTask=<h2>No Task Avilable</h2>
   if(maintask.length>0){
 
     
     renderTask=maintask.map((t,i)=>{
       return(
-      <li className='flex items-center justify-between mb-5'>
+      <li key={i} className='flex items-center justify-between mb-5'>
       <div className='flex items-center w-2/3 justify-between mb-5'>
       <h5 className='text-2xl font-semibold'>{t.title}</h5>
       <h6 className='text-2xl font-semibold'>{t.desc}</h6>
       </div>
-      <button className='bg-red-400 mb-5 text-white rounded px-4 py-2 font-bold'>Delete</button>
+      <button onClick={()=>{
+        deleteHandler(i)
+      }} 
+       className='bg-red-400 mb-5 text-white rounded px-4 py-2 font-bold'>Delete</button>
     </li>
     )
   })
